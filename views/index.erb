@@ -1,0 +1,46 @@
+<html>
+  <head>
+  <title>IMDB</title>
+  <style>
+    body {
+      width: 800;
+      margin: 0 auto;
+      background-color: #404040;
+      color: #fff;
+    }
+
+    a {
+      color: #BAC0E0;
+    }
+  </style>
+  </head>
+  <body>
+    <h1>Search for Movies in IMDB database</h1>
+    
+    <form action="search" method="POST">
+      <input type="text" name="title">
+      <input type="submit" value="Search">
+    </form>
+
+
+    <table>
+      <% @result.each do |movie| %>
+        <tr>
+        <td><img src="<%= movie.poster %>" width="200" height="200"></td>
+        <td valign="top">
+          <h2><a href="http://www.imdb.com/title/tt<%= movie.id %>"><%= movie.title %></a></h2>
+          <% if movie.rating > 9 %>
+            <font color="#006400" size="5em"><%= movie.rating %></font>
+          <% elsif movie.rating >= 8 %>
+            <font color="green" size="5em"><%= movie.rating %></font>
+          <% elsif movie.rating > 5.5 %>
+            <font color="yellow" size="5em"><%= movie.rating %></font>
+          <% else %>
+            <font color="red" size="5em"><%= movie.rating %></font>
+         <% end %>
+       </td>
+     </tr>
+      <% end %>
+    </table>
+  </body>
+</html>
